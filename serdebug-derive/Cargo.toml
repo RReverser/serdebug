@@ -1,0 +1,18 @@
+[package]
+authors = ["Ingvar Stepanyan <me@rreverser.com>"]
+name = "serdebug-derive"
+version = "0.1.0"
+
+[dependencies]
+quote = "0.4.2"
+syn = "0.12.10"
+
+[dev-dependencies]
+serde = "1.0.27"
+serde_derive = "1.0.27"
+
+[dev-dependencies.serdebug]
+path = "../serdebug"
+
+[lib]
+proc-macro = true

@@ -1,0 +1,7 @@
+[package]
+authors = ["Ingvar Stepanyan <me@rreverser.com>"]
+name = "serdebug"
+version = "0.1.0"
+
+[dependencies]
+serde = "1.0.27"
