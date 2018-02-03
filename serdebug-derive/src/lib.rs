@@ -13,26 +13,24 @@ pub fn derive(input: TokenStream) -> TokenStream {
 
     let mut predicates_tokens = quote::Tokens::default();
 
-    let empty_or_trailing;
+    let needs_comma;
 
     if let Some(where_clause) = ast.generics.where_clause.take() {
         let predicates = where_clause.predicates;
-        empty_or_trailing = predicates.empty_or_trailing();
+        needs_comma = !predicates.empty_or_trailing();
         predicates_tokens.append_all(predicates);
     } else {
-        empty_or_trailing = true;
+        needs_comma = false;
     };
 
-    if empty_or_trailing {
+    if needs_comma {
         predicates_tokens.append_all(quote!(,));
     }
-
-    predicates_tokens.append_all(quote!(Self: ::serde::Serialize));
 
     let (impl_generics, ty_generics, _) = ast.generics.split_for_impl();
 
     let tokens = quote! {
-        impl #impl_generics ::std::fmt::Debug for #name #ty_generics where #predicates_tokens {
+        impl #impl_generics ::std::fmt::Debug for #name #ty_generics where #predicates_tokens Self: ::serde::Serialize {
             fn fmt(&self, f: &mut ::std::fmt::Formatter) -> Result<(), ::std::fmt::Error> {
                 ::std::fmt::Debug::fmt(&::serdebug::Serialize(self), f)
             }
