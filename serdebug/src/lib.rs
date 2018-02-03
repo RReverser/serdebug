@@ -3,11 +3,11 @@ extern crate serde;
 use std::fmt::{self, Debug, DebugList, DebugMap, DebugTuple, DebugStruct, Formatter};
 use serde::ser;
 
-pub struct Serialize<T: ?Sized + ser::Serialize>(pub T);
+pub struct Serialize<'a, T: 'a + ?Sized + ser::Serialize>(pub &'a T);
 
-impl<T: ?Sized + ser::Serialize> Debug for Serialize<T> {
+impl<'a, T: 'a + ?Sized + ser::Serialize> Debug for Serialize<'a, T> {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        ser::Serialize::serialize(&self.0, Serializer(f))?;
+        ser::Serialize::serialize(self.0, Serializer(f))?;
         Ok(())
     }
 }
