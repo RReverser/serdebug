@@ -103,11 +103,11 @@ impl<'a, 'b: 'a> ser::Serializer for Serializer<'a, 'b> {
 
     fn serialize_unit_variant(
         self,
-        name: &'static str,
+        _name: &'static str,
         _variant_index: u32,
-        _variant: &'static str
+        variant: &'static str
     ) -> Result<Self::Ok, Self::Error> {
-        self.serialize_unit_struct(name)
+        self.serialize_unit_struct(variant)
     }
 
     fn serialize_none(self) -> Result<Self::Ok, Self::Error> {
@@ -126,12 +126,12 @@ impl<'a, 'b: 'a> ser::Serializer for Serializer<'a, 'b> {
 
     fn serialize_newtype_variant<T: ?Sized + ser::Serialize>(
         self,
-        name: &'static str,
+        _name: &'static str,
         _variant_index: u32,
-        _variant: &'static str,
+        variant: &'static str,
         value: &T
     ) -> Result<Self::Ok, Self::Error> {
-        self.serialize_newtype_struct(name, value)
+        self.serialize_newtype_struct(variant, value)
     }
 
     fn serialize_some<T: ?Sized + ser::Serialize>(
@@ -165,12 +165,12 @@ impl<'a, 'b: 'a> ser::Serializer for Serializer<'a, 'b> {
 
     fn serialize_tuple_variant(
         self,
-        name: &'static str,
+        _name: &'static str,
         _variant_index: u32,
-        _variant: &'static str,
+        variant: &'static str,
         len: usize
     ) -> Result<Self::SerializeTupleVariant, Self::Error> {
-        self.serialize_tuple_struct(name, len)
+        self.serialize_tuple_struct(variant, len)
     }
 
     fn serialize_map(
@@ -190,12 +190,12 @@ impl<'a, 'b: 'a> ser::Serializer for Serializer<'a, 'b> {
 
     fn serialize_struct_variant(
         self,
-        name: &'static str,
+        _name: &'static str,
         _variant_index: u32,
-        _variant: &'static str,
+        variant: &'static str,
         len: usize
     ) -> Result<Self::SerializeStructVariant, Self::Error> {
-        self.serialize_struct(name, len)
+        self.serialize_struct(variant, len)
     }
 }
 
