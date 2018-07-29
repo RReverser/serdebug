@@ -7,19 +7,19 @@ extern crate serdebug_derive;
 #[doc(hidden)]
 pub use serdebug_derive::*;
 
+mod debug;
 mod error;
-mod wrapper;
 
 mod map;
 mod seq;
 mod structure;
 mod tuple;
 
-use error::Error;
+pub use debug::Wrapper as DebugWrapper;
+pub use error::Error;
+
 use serde::ser::{self, Serialize, SerializeTupleStruct};
 use std::fmt::{Debug, Formatter};
-
-pub use wrapper::Wrapper;
 
 pub struct Serializer<'a, 'b: 'a>(pub &'a mut Formatter<'b>);
 

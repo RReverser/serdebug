@@ -1,7 +1,7 @@
 use error::Error;
 use serde::ser::{Serialize, SerializeMap};
 use std::fmt::{DebugMap, Formatter};
-use wrapper::Wrapper;
+use debug::Wrapper;
 
 pub struct Serializer<'a, 'b: 'a>(DebugMap<'a, 'b>);
 
