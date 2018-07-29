@@ -24,7 +24,7 @@ impl ser::Error for Error {
 
 impl fmt::Display for Error {
     fn fmt(&self, f: &mut Formatter) -> Result<(), fmt::Error> {
-        fmt::Display::fmt(&self.0, f)
+        self.0.fmt(f)
     }
 }
 
@@ -36,7 +36,7 @@ impl fmt::Debug for Error {
 
 impl error::Error for Error {
     fn description(&self) -> &str {
-        error::Error::description(&self.0)
+        self.0.description()
     }
 
     fn cause(&self) -> Option<&error::Error> {
