@@ -4,12 +4,12 @@ name = "serdebug-derive"
 version = "0.1.0"
 
 [dependencies]
-quote = "0.4.2"
-syn = "0.12.10"
+quote = "0.6.4"
+syn = "0.14.5"
 
 [dev-dependencies]
-serde = "1.0.27"
-serde_derive = "1.0.27"
+serde = "1.0.70"
+serde_derive = "1.0.70"
 
 [dev-dependencies.serdebug]
 path = "../serdebug"

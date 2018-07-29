@@ -4,4 +4,4 @@ name = "serdebug"
 version = "0.1.0"
 
 [dependencies]
-serde = "1.0.27"
+serde = "1.0.70"
