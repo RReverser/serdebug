@@ -1,5 +1,12 @@
 extern crate serde;
 
+#[macro_use]
+#[allow(unused_imports)]
+extern crate serdebug_derive;
+
+#[doc(hidden)]
+pub use serdebug_derive::*;
+
 mod error;
 mod wrapper;
 

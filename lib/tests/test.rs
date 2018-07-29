@@ -1,9 +1,10 @@
 extern crate serde;
+
+#[macro_use]
+extern crate serdebug;
+
 #[macro_use]
 extern crate serde_derive;
-extern crate serdebug;
-#[macro_use]
-extern crate serdebug_derive;
 
 macro_rules! test {
 	(@decl $(# $attr:tt)* struct { $($payload:tt)* }) => {
