@@ -15,11 +15,11 @@ mod seq;
 mod structure;
 mod tuple;
 
-pub use debug::Wrapper as DebugWrapper;
 pub use error::Error;
 
+use debug::Wrapper;
 use serde::ser::{self, Serialize, SerializeTupleStruct};
-use std::fmt::{Debug, Formatter};
+use std::fmt::{self, Debug, Formatter};
 
 pub struct Serializer<'a, 'b: 'a>(pub &'a mut Formatter<'b>);
 
@@ -152,4 +152,16 @@ impl<'a, 'b: 'a> ser::Serializer for Serializer<'a, 'b> {
     ) -> Result<Self::SerializeStructVariant, Self::Error> {
         self.serialize_struct(variant, len)
     }
+}
+
+pub fn fmt<T: ?Sized + Serialize>(value: &T, f: &mut Formatter) -> fmt::Result {
+    Wrapper(value).fmt(f)
+}
+
+pub fn to_string<T: ?Sized + Serialize>(value: &T) -> String {
+    format!("{:?}", Wrapper(value))
+}
+
+pub fn to_string_pretty<T: ?Sized + Serialize>(value: &T) -> String {
+    format!("{:#?}", Wrapper(value))
 }

@@ -25,8 +25,8 @@ pub fn derive(input: TokenStream) -> TokenStream {
 
     (quote! {
         impl #impl_generics ::std::fmt::Debug for #ident #ty_generics #where_clause {
-            fn fmt(&self, f: &mut ::std::fmt::Formatter) -> Result<(), ::std::fmt::Error> {
-                ::std::fmt::Debug::fmt(&::serdebug::Wrapper(self), f)
+            fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+                ::serdebug::fmt(self, f)
             }
         }
     }).into()
