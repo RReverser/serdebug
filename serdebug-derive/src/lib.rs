@@ -32,7 +32,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
     let tokens = quote! {
         impl #impl_generics ::std::fmt::Debug for #name #ty_generics where #predicates_tokens Self: ::serde::Serialize {
             fn fmt(&self, f: &mut ::std::fmt::Formatter) -> Result<(), ::std::fmt::Error> {
-                ::std::fmt::Debug::fmt(&::serdebug::Serialize(self), f)
+                ::std::fmt::Debug::fmt(&::serdebug::Wrapper(self), f)
             }
         }
     };
