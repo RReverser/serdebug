@@ -1,7 +1,7 @@
+use debug::Wrapper;
 use error::Error;
 use serde::ser::{Serialize, SerializeSeq};
 use std::fmt::{DebugList, Formatter};
-use debug::Wrapper;
 
 pub struct Serializer<'a, 'b: 'a>(DebugList<'a, 'b>);
 

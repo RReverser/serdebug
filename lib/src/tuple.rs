@@ -1,7 +1,7 @@
+use debug::Wrapper;
 use error::Error;
 use serde::ser::{Serialize, SerializeTuple, SerializeTupleStruct, SerializeTupleVariant};
 use std::fmt::{DebugTuple, Formatter};
-use debug::Wrapper;
 
 pub struct Serializer<'a, 'b: 'a>(DebugTuple<'a, 'b>);
 
