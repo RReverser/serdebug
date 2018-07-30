@@ -2,7 +2,7 @@ use serde::ser;
 use std::error;
 use std::fmt::{self, Formatter};
 
-/// A [`serde::ser::Error`]-compatible wrapper for [`fmt::Error`].
+/// A [`ser::Error`]-compatible wrapper for [`fmt::Error`].
 pub struct Error(fmt::Error);
 
 impl From<Error> for fmt::Error {

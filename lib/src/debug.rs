@@ -11,7 +11,7 @@ impl<T: Serialize> Debug for Wrapper<T> {
     }
 }
 
-/// Wrap a value supporting just [`serde::Serialize`] into [`Debug`].
+/// Wrap a value supporting just [`Serialize`] into [`Debug`].
 pub fn debug<'a, T: ?Sized + Serialize>(value: &'a T) -> impl Debug + 'a {
     Wrapper(value)
 }

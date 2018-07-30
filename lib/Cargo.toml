@@ -1,7 +1,7 @@
 [package]
 name = "serdebug"
-description = "Serde-based replacement for #[derive(Debug)]"
-version = "1.0.4"
+description = "serde-based replacement for #[derive(Debug)]"
+version = "1.0.5"
 authors = ["Ingvar Stepanyan <me@rreverser.com>"]
 license = "MIT"
 repository = "https://github.com/RReverser/serdebug"

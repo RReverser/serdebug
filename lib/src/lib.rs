@@ -24,7 +24,7 @@ mod tuple;
 use serde::ser::{self, Serialize, SerializeTupleStruct};
 use std::fmt::{self, Debug, Formatter};
 
-/// A [`serde::Serializer`]-compatible wrapper for a [`Formatter`].
+/// A [`Serializer`](::serde::Serializer)-compatible wrapper for a [`Formatter`].
 pub struct Serializer<'a, 'b: 'a>(pub &'a mut Formatter<'b>);
 
 macro_rules! simple_impl {

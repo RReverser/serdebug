@@ -3,6 +3,7 @@
 [![Travis CI](https://img.shields.io/travis/RReverser/serdebug.svg)](https://travis-ci.org/RReverser/serdebug)
 [![GitHub license](https://img.shields.io/github/license/RReverser/serdebug.svg)](https://github.com/RReverser/serdebug)
 [![Crates.io](https://img.shields.io/crates/v/serdebug.svg)](https://crates.io/crates/serdebug)
+[![docs.rs](https://docs.rs/serdebug/badge.svg)](https://docs.rs/serdebug)
 
 This is a drop-in replacement for `#[derive(Debug)]` that uses `serde::Serialize` under the hood to provide advanced control over output serialisation.
 
@@ -10,7 +11,7 @@ This is a drop-in replacement for `#[derive(Debug)]` that uses `serde::Serialize
 
 By default, the generated code will produce exactly same output as `#[derive(Debug)]` for compatibility.
 
-However, this might be not very interesting, so let's add some Serde attributes to see how we can control debug representation:
+However, this might be not very interesting, so let's add some serde attributes to see how we can control debug representation:
 
 ```rust
 extern crate serde;
