@@ -1,12 +1,12 @@
 extern crate rustc_version;
 
-use rustc_version::{version_meta, Channel::Nightly, VersionMeta};
+use rustc_version::{version_meta, Channel};
 
 fn main() {
-    if let Ok(VersionMeta {
-        channel: Nightly, ..
-    }) = version_meta()
-    {
-        println!("cargo:rustc-cfg=nightly");
+    match version_meta().unwrap().channel {
+        Channel::Nightly | Channel::Dev => {
+            println!("cargo:rustc-cfg=nightly");
+        }
+        _ => {}
     }
 }
