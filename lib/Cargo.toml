@@ -5,7 +5,7 @@ version = "1.0.3"
 authors = ["Ingvar Stepanyan <me@rreverser.com>"]
 license = "MIT"
 repository = "https://github.com/RReverser/serdebug"
-readme = "../README.md"
+readme = "README.md"
 categories = ["development-tools::debugging", "value-formatting"]
 
 [build-dependencies]
