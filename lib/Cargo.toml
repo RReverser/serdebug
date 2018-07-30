@@ -16,7 +16,7 @@ rustc_version = "0.2.2"
 
 [dependencies]
 serde = "1.0.70"
-serdebug_derive = { path = "../derive" }
+serdebug_derive = { version = "1.0.0", path = "../derive" }
 
 [dev-dependencies]
 serde_derive = "1.0.70"
