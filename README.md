@@ -1,5 +1,10 @@
 # serdebug
 
+[![Travis CI](https://img.shields.io/travis/RReverser/serdebug.svg)](https://travis-ci.org/RReverser/serdebug)
+[![GitHub license](https://img.shields.io/github/license/RReverser/serdebug.svg)](https://github.com/RReverser/serdebug)
+[![Crates.io](https://img.shields.io/crates/v/serdebug.svg)](https://crates.io/crates/serdebug)
+[![docs.rs](https://docs.rs/serdebug/badge.svg)](https://docs.rs/serdebug)
+
 This is a drop-in replacement for `#[derive(Debug)]` that uses `serde::Serialize` under the hood to provide advanced control over output serialisation.
 
 ## Usage
