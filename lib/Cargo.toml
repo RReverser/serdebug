@@ -1,8 +1,12 @@
 [package]
-authors = ["Ingvar Stepanyan <me@rreverser.com>"]
 name = "serdebug"
-version = "0.1.0"
+description = "Serde-based replacement for #[derive(Debug)]"
+version = "1.0.0"
+authors = ["Ingvar Stepanyan <me@rreverser.com>"]
+license = "MIT"
+repository = "https://github.com/RReverser/serdebug"
 readme = "../README.md"
+categories = ["development-tools::debugging", "value-formatting"]
 
 [features]
 nightly = []
@@ -16,3 +20,6 @@ serdebug_derive = { path = "../derive" }
 
 [dev-dependencies]
 serde_derive = "1.0.70"
+
+[badges]
+travis-ci = { repository = "RReverser/serdebug", branch = "master" }

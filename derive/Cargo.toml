@@ -1,7 +1,10 @@
 [package]
-authors = ["Ingvar Stepanyan <me@rreverser.com>"]
 name = "serdebug_derive"
-version = "0.1.0"
+description = "Proc-macro part for serdebug (see main crate for more details)"
+version = "1.0.0"
+authors = ["Ingvar Stepanyan <me@rreverser.com>"]
+license = "MIT"
+repository = "https://github.com/RReverser/serdebug"
 
 [dependencies]
 quote = "0.6.4"
