@@ -1,4 +1,4 @@
-use debug::Wrapper;
+use debug::debug;
 use error::Error;
 use serde::ser::{Serialize, SerializeSeq};
 use std::fmt::{DebugList, Formatter};
@@ -16,7 +16,7 @@ impl<'a, 'b: 'a> SerializeSeq for Serializer<'a, 'b> {
     type Error = Error;
 
     fn serialize_element<T: ?Sized + Serialize>(&mut self, value: &T) -> Result<(), Self::Error> {
-        self.0.entry(&Wrapper(value));
+        self.0.entry(&debug(value));
         Ok(())
     }
 

@@ -1,4 +1,4 @@
-use debug::Wrapper;
+use debug::debug;
 use error::Error;
 use serde::ser::{Serialize, SerializeStruct, SerializeStructVariant};
 use std::fmt::{DebugStruct, Formatter};
@@ -20,7 +20,7 @@ impl<'a, 'b: 'a> SerializeStruct for Serializer<'a, 'b> {
         key: &'static str,
         value: &T,
     ) -> Result<(), Self::Error> {
-        self.0.field(key, &Wrapper(value));
+        self.0.field(key, &debug(value));
         Ok(())
     }
 

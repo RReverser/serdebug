@@ -13,17 +13,18 @@ pub use serdebug_derive::*;
 mod debug;
 mod error;
 
+pub use debug::debug;
+pub use error::Error;
+
 mod map;
 mod seq;
 mod structure;
 mod tuple;
 
-pub use error::Error;
-
-use debug::Wrapper;
 use serde::ser::{self, Serialize, SerializeTupleStruct};
 use std::fmt::{self, Debug, Formatter};
 
+/// A [`serde::Serializer`]-compatible wrapper for a [`Formatter`].
 pub struct Serializer<'a, 'b: 'a>(pub &'a mut Formatter<'b>);
 
 macro_rules! simple_impl {
@@ -157,14 +158,17 @@ impl<'a, 'b: 'a> ser::Serializer for Serializer<'a, 'b> {
     }
 }
 
+/// Format value's debug representation into a given [`Formatter`].
 pub fn fmt<T: ?Sized + Serialize>(value: &T, f: &mut Formatter) -> fmt::Result {
-    Wrapper(value).fmt(f)
+    debug(value).fmt(f)
 }
 
+/// Convert value into a string with a concise debug representation.
 pub fn to_string<T: ?Sized + Serialize>(value: &T) -> String {
-    format!("{:?}", Wrapper(value))
+    format!("{:?}", debug(value))
 }
 
+/// Pretty-print value into a string with a debug representation.
 pub fn to_string_pretty<T: ?Sized + Serialize>(value: &T) -> String {
-    format!("{:#?}", Wrapper(value))
+    format!("{:#?}", debug(value))
 }

@@ -2,6 +2,7 @@ use serde::ser;
 use std::error;
 use std::fmt::{self, Formatter};
 
+/// A [`serde::ser::Error`]-compatible wrapper for [`fmt::Error`].
 pub struct Error(fmt::Error);
 
 impl From<Error> for fmt::Error {
@@ -18,7 +19,7 @@ impl From<fmt::Error> for Error {
 
 impl ser::Error for Error {
     fn custom<T: fmt::Display>(_msg: T) -> Self {
-        unreachable!()
+        unimplemented!("This type is intended to be used only for fmt::Error")
     }
 }
 

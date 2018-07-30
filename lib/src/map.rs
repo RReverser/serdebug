@@ -1,4 +1,4 @@
-use debug::Wrapper;
+use debug::debug;
 use error::Error;
 use serde::ser::{Serialize, SerializeMap};
 use std::fmt::{DebugMap, Formatter};
@@ -28,7 +28,7 @@ impl<'a, 'b: 'a> SerializeMap for Serializer<'a, 'b> {
         key: &K,
         value: &V,
     ) -> Result<(), Self::Error> {
-        self.0.entry(&Wrapper(key), &Wrapper(value));
+        self.0.entry(&debug(key), &debug(value));
         Ok(())
     }
 

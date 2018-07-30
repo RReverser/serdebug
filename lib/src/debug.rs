@@ -2,11 +2,16 @@ use serde::ser::Serialize;
 use std::fmt::{self, Debug, Formatter};
 use Serializer;
 
-pub(crate) struct Wrapper<'a, T: 'a + ?Sized + Serialize>(pub &'a T);
+struct Wrapper<T: Serialize>(T);
 
-impl<'a, T: 'a + ?Sized + Serialize> Debug for Wrapper<'a, T> {
+impl<T: Serialize> Debug for Wrapper<T> {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         self.0.serialize(Serializer(f))?;
         Ok(())
     }
+}
+
+/// Wrap a value supporting just [`serde::Serialize`] into [`Debug`].
+pub fn debug<'a, T: ?Sized + Serialize>(value: &'a T) -> impl Debug + 'a {
+    Wrapper(value)
 }
