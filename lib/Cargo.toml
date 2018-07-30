@@ -2,6 +2,13 @@
 authors = ["Ingvar Stepanyan <me@rreverser.com>"]
 name = "serdebug"
 version = "0.1.0"
+readme = "../README.md"
+
+[features]
+nightly = []
+
+[build-dependencies]
+rustc_version = "0.2.2"
 
 [dependencies]
 serde = "1.0.70"
