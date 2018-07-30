@@ -7,6 +7,7 @@ license = "MIT"
 repository = "https://github.com/RReverser/serdebug"
 readme = "README.md"
 categories = ["development-tools::debugging", "value-formatting"]
+keywords = ["serialization", "serde", "debug", "formatting", "derive"]
 
 [build-dependencies]
 rustc_version = "0.2.2"
