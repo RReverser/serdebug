@@ -1,12 +1,6 @@
-extern crate proc_macro;
-
-#[macro_use]
-extern crate syn;
-
-#[macro_use]
-extern crate quote;
-
 use proc_macro::TokenStream;
+use quote::quote;
+use syn::parse_quote;
 
 #[proc_macro_derive(SerDebug)]
 pub fn derive(input: TokenStream) -> TokenStream {
@@ -29,5 +23,6 @@ pub fn derive(input: TokenStream) -> TokenStream {
                 ::serdebug::fmt(self, f)
             }
         }
-    }).into()
+    })
+    .into()
 }
