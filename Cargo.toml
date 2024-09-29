@@ -10,6 +10,9 @@ keywords = ["serialization", "serde", "debug", "formatting", "derive"]
 [workspace.dependencies]
 serde = "1.0"
 
+[workspace]
+members = ["derive"]
+
 [package]
 name = "serdebug"
 description = "serde-based replacement for #[derive(Debug)]"
@@ -24,7 +27,7 @@ keywords.workspace = true
 
 [dependencies]
 serde.workspace = true
-serdebug_derive = { path = "derive" }
+serdebug_derive = { path = "derive", version = "1.1.0" }
 thiserror = "1.0.64"
 
 [dev-dependencies]
