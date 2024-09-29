@@ -24,7 +24,7 @@ keywords.workspace = true
 
 [dependencies]
 serde.workspace = true
-serdebug_derive = { version = "1.0.0", path = "derive" }
+serdebug_derive = { path = "derive" }
 thiserror = "1.0.64"
 
 [dev-dependencies]
