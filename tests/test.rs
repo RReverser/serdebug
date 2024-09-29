@@ -1,11 +1,3 @@
-extern crate serde;
-
-#[macro_use]
-extern crate serdebug;
-
-#[macro_use]
-extern crate serde_derive;
-
 macro_rules! test {
 	(@decl $(# $attr:tt)* struct { $($payload:tt)* }) => {
 		#[derive(Default)]
@@ -43,7 +35,7 @@ macro_rules! test {
 		#[test]
 		fn $name() {
 			mod lhs {
-				test!(@decl #[derive(Serialize, SerDebug)] $kind $($payload)*);
+				test!(@decl #[derive(serde::Serialize, serdebug::SerDebug)] $kind $($payload)*);
 			}
 
 			mod rhs {

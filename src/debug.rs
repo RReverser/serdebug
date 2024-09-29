@@ -1,6 +1,6 @@
+use crate::Serializer;
 use serde::ser::Serialize;
 use std::fmt::{self, Debug, Formatter};
-use Serializer;
 
 struct Wrapper<T: Serialize>(T);
 
@@ -12,6 +12,6 @@ impl<T: Serialize> Debug for Wrapper<T> {
 }
 
 /// Wrap a value supporting just [`Serialize`] into [`Debug`].
-pub fn debug<'a, T: ?Sized + Serialize>(value: &'a T) -> impl Debug + 'a {
+pub fn debug<T: ?Sized + Serialize>(value: &T) -> impl Debug + '_ {
     Wrapper(value)
 }

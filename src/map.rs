@@ -1,5 +1,4 @@
-use debug::debug;
-use error::Error;
+use crate::{debug, Error};
 use serde::ser::{Serialize, SerializeMap};
 use std::fmt::{DebugMap, Formatter};
 

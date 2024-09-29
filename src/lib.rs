@@ -1,14 +1,6 @@
-#![cfg_attr(nightly, feature(external_doc))]
-#![cfg_attr(nightly, doc(include = "../README.md"))]
+#![doc = include_str!("../README.md")]
 
-extern crate serde;
-
-#[macro_use]
-#[allow(unused_imports)]
-extern crate serdebug_derive;
-
-#[doc(hidden)]
-pub use serdebug_derive::*;
+pub use serdebug_derive::SerDebug;
 
 mod debug;
 mod error;

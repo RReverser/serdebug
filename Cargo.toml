@@ -1,5 +1,31 @@
-[workspace]
-members = [
-	"lib",
-	"derive",
-]
+[workspace.package]
+version = "1.1.0"
+edition = "2021"
+authors = ["Ingvar Stepanyan <me@rreverser.com>"]
+license = "MIT"
+repository = "https://github.com/RReverser/serdebug"
+categories = ["development-tools::debugging", "value-formatting"]
+keywords = ["serialization", "serde", "debug", "formatting", "derive"]
+
+[workspace.dependencies]
+serde = "1.0"
+
+[package]
+name = "serdebug"
+description = "serde-based replacement for #[derive(Debug)]"
+readme = "README.md"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+categories.workspace = true
+keywords.workspace = true
+
+[dependencies]
+serde.workspace = true
+serdebug_derive = { version = "1.0.0", path = "derive" }
+thiserror = "1.0.64"
+
+[dev-dependencies]
+serde = { workspace = true, features = ["derive"] }
