@@ -47,8 +47,6 @@ pub struct MyStruct {
 }
 
 fn custom_serialize<S: serde::Serializer>(value: &CustomType, ser: S) -> Result<S::Ok, S::Error> {
-    use serde::Serialize;
-
     value.0.serialize(ser)
 }
 
