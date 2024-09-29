@@ -60,7 +60,7 @@ fn main() {
         custom_type: CustomType(20),
     };
 
-    assert_eq!(format!("{:#?}", s), "
+    assert_eq!(format!("{s:#?}"), "
 MyStruct {
     Number: 42,
     MyEnum: [
