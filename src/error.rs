@@ -1,14 +1,31 @@
+use core::fmt;
 use serde::ser;
-use std::fmt;
 
 /// A [`ser::Error`]-compatible wrapper for [`fmt::Error`].
-#[derive(thiserror::Error, Debug)]
-#[error(transparent)]
-pub struct Error(#[from] fmt::Error);
+#[derive(Debug)]
+pub struct Error(fmt::Error);
+
+impl From<fmt::Error> for Error {
+    fn from(err: fmt::Error) -> Error {
+        Error(err)
+    }
+}
 
 impl From<Error> for fmt::Error {
     fn from(err: Error) -> fmt::Error {
         err.0
+    }
+}
+
+impl fmt::Display for Error {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        self.0.fmt(f)
+    }
+}
+
+impl core::error::Error for Error {
+    fn source(&self) -> Option<&(dyn core::error::Error + 'static)> {
+        Some(&self.0)
     }
 }
 

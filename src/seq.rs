@@ -1,6 +1,6 @@
 use crate::{debug, Error};
+use core::fmt::{DebugList, Formatter};
 use serde::ser::{Serialize, SerializeSeq};
-use std::fmt::{DebugList, Formatter};
 
 pub struct Serializer<'a, 'b: 'a>(DebugList<'a, 'b>);
 

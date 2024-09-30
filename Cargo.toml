@@ -4,11 +4,11 @@ edition = "2021"
 authors = ["Ingvar Stepanyan <me@rreverser.com>"]
 license = "MIT"
 repository = "https://github.com/RReverser/serdebug"
-categories = ["development-tools::debugging", "value-formatting"]
+categories = ["development-tools::debugging", "value-formatting", "no-std"]
 keywords = ["serialization", "serde", "debug", "formatting", "derive"]
 
 [workspace.dependencies]
-serde = "1.0"
+serde = { version = "1.0", default-features = false, features = ["alloc"] }
 
 [workspace]
 members = ["derive"]
@@ -28,9 +28,10 @@ keywords.workspace = true
 [dependencies]
 serde.workspace = true
 serdebug_derive = { path = "derive", version = "1.1.0" }
-thiserror = "1.0.64"
+
+[features]
 
 [dev-dependencies]
-serde = { workspace = true, features = ["derive"] }
+serde = { workspace = true, features = ["derive", "std"] }
 proptest = "1.5.0"
 test-strategy = "0.4.0"

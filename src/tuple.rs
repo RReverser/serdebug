@@ -1,6 +1,6 @@
 use crate::{debug, Error};
+use core::fmt::{DebugTuple, Formatter};
 use serde::ser::{Serialize, SerializeTuple, SerializeTupleStruct, SerializeTupleVariant};
-use std::fmt::{DebugTuple, Formatter};
 
 pub struct Serializer<'a, 'b: 'a>(DebugTuple<'a, 'b>);
 

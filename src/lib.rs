@@ -1,20 +1,23 @@
 #![doc = include_str!("../README.md")]
+#![no_std]
 
-pub use serdebug_derive::SerDebug;
+extern crate alloc;
 
 mod debug;
 mod error;
-
-pub use debug::debug;
-pub use error::Error;
-
 mod map;
 mod seq;
 mod structure;
 mod tuple;
 
+use alloc::format;
+use alloc::string::String;
+use core::fmt::{self, Debug, Formatter};
 use serde::ser::{self, Serialize, SerializeTupleStruct};
-use std::fmt::{self, Debug, Formatter};
+
+pub use debug::debug;
+pub use error::Error;
+pub use serdebug_derive::SerDebug;
 
 /// A [`Serializer`](::serde::Serializer)-compatible wrapper for a [`Formatter`].
 pub struct Serializer<'a, 'b: 'a>(pub &'a mut Formatter<'b>);

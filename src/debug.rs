@@ -1,6 +1,6 @@
 use crate::Serializer;
+use core::fmt::{self, Debug, Formatter};
 use serde::ser::Serialize;
-use std::fmt::{self, Debug, Formatter};
 
 struct Wrapper<T: Serialize>(T);
 
