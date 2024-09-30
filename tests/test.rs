@@ -1,5 +1,6 @@
 use serde::Serialize;
 use serdebug::SerDebug;
+use std::collections::HashMap;
 use std::fmt::Debug;
 use test_strategy::{proptest, Arbitrary};
 
@@ -56,9 +57,9 @@ macro_rules! test {
 	};
 }
 
-test!(named_fields { a: u32, b: Option<f64>, c: String, d: () });
+test!(named_fields { a: u32, b: Option<f64>, c: String, d: (), e: HashMap<u32, String>, f: Vec<u32> });
 test!(empty_named_fields {});
-test!(tuple_fields(u32, Option<f64>, String, ()));
+test!(tuple_fields(u32, Option<f64>, String, (), HashMap<u32, String>, Vec<u32>));
 test!(single_tuple_field(u32));
 test!(empty_tuple_fields());
 test!(no_fields);
