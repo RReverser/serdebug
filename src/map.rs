@@ -14,20 +14,13 @@ impl<'a, 'b: 'a> SerializeMap for Serializer<'a, 'b> {
     type Ok = ();
     type Error = Error;
 
-    fn serialize_key<T: ?Sized + Serialize>(&mut self, _key: &T) -> Result<(), Self::Error> {
-        unimplemented!("Only entries are supported in DebugMap")
+    fn serialize_key<T: ?Sized + Serialize>(&mut self, key: &T) -> Result<(), Self::Error> {
+        self.0.key(&debug(key));
+        Ok(())
     }
 
-    fn serialize_value<T: ?Sized + Serialize>(&mut self, _value: &T) -> Result<(), Self::Error> {
-        unimplemented!("Only entries are supported in DebugMap")
-    }
-
-    fn serialize_entry<K: ?Sized + Serialize, V: ?Sized + Serialize>(
-        &mut self,
-        key: &K,
-        value: &V,
-    ) -> Result<(), Self::Error> {
-        self.0.entry(&debug(key), &debug(value));
+    fn serialize_value<T: ?Sized + Serialize>(&mut self, value: &T) -> Result<(), Self::Error> {
+        self.0.value(&debug(value));
         Ok(())
     }
 
