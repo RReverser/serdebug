@@ -1,52 +1,50 @@
+use serde::Serialize;
+use serdebug::SerDebug;
+use std::fmt::Debug;
+use test_strategy::{proptest, Arbitrary};
+
+fn test_via_serdebug<T: Debug + Serialize>(lhs: T) {
+    #[derive(Serialize, SerDebug)]
+    #[serde(transparent)]
+    struct Rhs<'a, T>(&'a T);
+
+    let rhs = Rhs(&lhs);
+
+    assert_eq!(format!("{lhs:#?}"), format!("{rhs:#?}"));
+    assert_eq!(format!("{lhs:?}"), format!("{rhs:?}"));
+}
+
 macro_rules! test {
 	(@decl $(# $attr:tt)* struct { $($payload:tt)* }) => {
-		#[derive(Default)]
-		#[allow(dead_code)]
 		$(# $attr)*
-		pub struct Test { $($payload)* }
+		struct Lhs { $($payload)* }
 	};
 
 	(@decl $(# $attr:tt)* struct $($payload:tt)*) => {
-		#[derive(Default)]
-		#[allow(dead_code)]
 		$(# $attr)*
-		pub struct Test $($payload)*;
+		struct Lhs $($payload)*;
 	};
 
 	(@decl $(# $attr:tt)* enum $($payload:tt)*) => {
 		$(# $attr)*
-		pub enum Test {
-			#[allow(dead_code)]
+		enum Lhs {
 			Variant $($payload)*
-		}
-
-		impl Default for Test {
-			fn default() -> Self {
-				test!(@decl struct $($payload)*);
-
-				unsafe {
-					::std::mem::transmute(Test::default())
-				}
-			}
 		}
 	};
 
-	(@kind $name:ident $kind:tt $($payload:tt)*) => {
-		#[test]
-		fn $name() {
-			mod lhs {
-				test!(@decl #[derive(serde::Serialize, serdebug::SerDebug)] $kind $($payload)*);
+	// Uninhabited enums can't be constructed by definition.
+	(@kind $name:ident enum {}) => {};
+
+	(@kind $name:ident $kind:ident $($payload:tt)*) => {
+		mod $name {
+			use crate::*;
+
+			test!(@decl #[derive(Serialize, Debug, Arbitrary)] $kind $($payload)*);
+
+			#[proptest]
+			fn test(lhs: Lhs) {
+				test_via_serdebug(lhs);
 			}
-
-			mod rhs {
-				test!(@decl #[derive(Debug)] $kind $($payload)*);
-			}
-
-			let lhs = lhs::Test::default();
-			let rhs = rhs::Test::default();
-
-			assert_eq!(format!("{:#?}", lhs), format!("{:#?}", rhs));
-			assert_eq!(format!("{:?}", lhs), format!("{:?}", rhs));
 		}
 	};
 
@@ -58,9 +56,9 @@ macro_rules! test {
 	};
 }
 
-test!(named_fields { a: u32, b: Option<f64>, c: &'static str, d: () });
+test!(named_fields { a: u32, b: Option<f64>, c: String, d: () });
 test!(empty_named_fields {});
-test!(tuple_fields(u32, Option<f64>, &'static str, ()));
+test!(tuple_fields(u32, Option<f64>, String, ()));
 test!(single_tuple_field(u32));
 test!(empty_tuple_fields());
 test!(no_fields);

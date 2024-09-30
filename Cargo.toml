@@ -32,3 +32,5 @@ thiserror = "1.0.64"
 
 [dev-dependencies]
 serde = { workspace = true, features = ["derive"] }
+proptest = "1.5.0"
+test-strategy = "0.4.0"
