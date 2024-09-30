@@ -26,6 +26,7 @@ categories.workspace = true
 keywords.workspace = true
 
 [dependencies]
+ref-cast = "1.0.23"
 serde.workspace = true
 serdebug_derive = { path = "derive", version = "1.1.0" }
 

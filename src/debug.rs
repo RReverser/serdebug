@@ -1,10 +1,13 @@
 use crate::Serializer;
 use core::fmt::{self, Debug, Formatter};
+use ref_cast::RefCast;
 use serde::ser::Serialize;
 
-struct Wrapper<T: Serialize>(T);
+#[derive(RefCast)]
+#[repr(transparent)]
+struct Wrapper<T: ?Sized + Serialize>(T);
 
-impl<T: Serialize> Debug for Wrapper<T> {
+impl<T: ?Sized + Serialize> Debug for Wrapper<T> {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         self.0.serialize(Serializer(f))?;
         Ok(())
@@ -12,6 +15,6 @@ impl<T: Serialize> Debug for Wrapper<T> {
 }
 
 /// Wrap a value supporting just [`Serialize`] into [`Debug`].
-pub fn debug<T: ?Sized + Serialize>(value: &T) -> impl Debug + '_ {
-    Wrapper(value)
+pub fn debug<T: ?Sized + Serialize>(value: &T) -> &(impl ?Sized + Debug) {
+    Wrapper::ref_cast(value)
 }
